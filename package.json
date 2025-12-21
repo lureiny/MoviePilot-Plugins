@@ -1,0 +1,17 @@
+{
+    "EventExecutor": {
+        "name": "事件执行器",
+        "description": "监听系统事件，将事件数据作为环境变量传递给自定义 Bash 命令执行。类似 Webhook 插件的本地版本。",
+        "labels": "工具",
+        "version": "1.1.1",
+        "icon": "executor.png",
+        "author": "lureiny",
+        "level": 1,
+        "v2": true,
+        "history": {
+            "v1.1.1": "修复：timeout 参数类型转换问题（Web 表单传来的是字符串）",
+            "v1.1.0": "优化配置：事件类型改为单选下拉列表，添加超时时间配置，标记常用事件",
+            "v1.0.0": "首次发布 V2 版本，参考官方 Webhook 插件实现，仅监听广播事件，支持自定义 Bash 命令执行"
+        }
+    }
+}
