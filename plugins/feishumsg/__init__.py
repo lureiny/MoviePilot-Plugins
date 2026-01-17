@@ -197,34 +197,29 @@ class FeiShuMsg(_PluginBase):
             logger.warn("标题和内容不能同时为空")
             return
 
-        # 最新的api要求不能为nil
-        if not title:
-            title = " "
-        if not text:
-            text = " "
-
         if (msg_type and self._msgtypes
                 and msg_type.name not in self._msgtypes):
             logger.info(f"消息类型 {msg_type.value} 未开启消息发送")
             return
 
         try:
+            content = []
+
+            if text:
+                content.append([{"tag": "text", "text": text}])
             payload = {
                 "msg_type": "post",
                 "content": {
                     "post": {
                         "zh_cn": {
-                            "title": title,
-                            "content": [
-                                [{
-                                    "tag": "text",
-                                    "text": text
-                                }]
-                            ]
+                            "content": content
                         }
                     }
                 }
             }
+
+            if title:
+                payload["content"]["post"]["zh_cn"]["title"] = title
 
             # 如果存在密钥时，还需要进行签名处理
             if self._secret:
